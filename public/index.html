@@ -12,8 +12,7 @@
 
     <script src="socket.io/socket.io.js"></script>
     <script>
-        var socket = io("http://34.224.60.108:3000/");
-        //var socket = io("https://backendgraph-dev-acrr.3.us-1.fl0.io/");
+        var socket = io();
         socket.on('connect', function(){
             console.log('conectado al servidor');
         });
