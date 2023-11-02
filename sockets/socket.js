@@ -2,6 +2,9 @@ const { io } = require('../index');
 const Band = require('../models/band');
 const Bands = require('../models/bands');
 
+const WebSocket = require('ws');
+
+
 const bands = new Bands();
 
 bands.addBand(new Band('FMLN'));
@@ -9,6 +12,12 @@ bands.addBand(new Band('Nuevas Ideas'));
 bands.addBand(new Band('Arena'));
 bands.addBand(new Band('PCN'));
 
+// const serverUrl = 'ws://34.224.60.108:3000/';
+// const my_socket = new WebSocket(serverUrl);
+
+// my_socket.on('active-bands', (payload) => {
+//     console.log('Conexión establecida.');
+//   });
 
 //mensajes de sockets
 io.on('connection', client => {
