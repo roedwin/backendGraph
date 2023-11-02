@@ -5,13 +5,19 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors({
-    origin: true,
-    credentials:true
-}));
+// app.use(cors({
+//     origin: true,
+//     credentials:true
+// }));
 
 //Node server
 const server = require('http').createServer(app);
+// Configurar CORS manualmente
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Esto permite a cualquier origen acceder a tu servidor
+    // Otros encabezados CORS si es necesario
+    next();
+  });
 module.exports.io = require('socket.io')(server);
 
 require('./sockets/socket');
