@@ -12,13 +12,7 @@ const app = express();
 
 //Node server
 const server = require('http').createServer(app);
-// Configurar CORS manualmente
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Esto permite a cualquier origen acceder a tu servidor
-    // Otros encabezados CORS si es necesario
-    next();
-  });
-module.exports.io = require('socket.io')(server);
+module.exports.io = require('socket.io')(server,{cors:{origin:true}});
 
 require('./sockets/socket');
 

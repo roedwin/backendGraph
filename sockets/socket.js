@@ -7,10 +7,10 @@ const WebSocket = require('ws');
 
 const bands = new Bands();
 
-bands.addBand(new Band('FMLN'));
-bands.addBand(new Band('Nuevas Ideas'));
-bands.addBand(new Band('Arena'));
-bands.addBand(new Band('PCN'));
+bands.addBand(new Band(1,'FMLN'));
+bands.addBand(new Band(2,'Nuevas Ideas'));
+bands.addBand(new Band(3,'Arena'));
+bands.addBand(new Band(4,'PCN'));
 
 // const serverUrl = 'ws://34.224.60.108:3000/';
 // const my_socket = new WebSocket(serverUrl);
@@ -37,7 +37,7 @@ io.on('connection', client => {
 
     client.on('vote-band', (payload)=> {
         //console.log(payload.id)
-        bands.voteBand(payload.id);
+        bands.voteBand(payload.id, payload.genero);
         io.emit('active-bands', bands.getBands());
     });
 

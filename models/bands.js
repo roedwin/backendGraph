@@ -18,11 +18,16 @@ class Bands {
         return this.bands;
     }
 
-    voteBand(id =''){
+    voteBand(id = '', genero){
         this.bands = this.bands.map( band => {
 
             if ( band.id === id ) {
                 band.votes++;
+                if (genero === 'M') {
+                    band.M++;
+                }else{
+                    band.F++;
+                }
                 return band;
             } else {
                 return band;
