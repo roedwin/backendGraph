@@ -37,7 +37,7 @@ io.on('connection', client => {
 
     client.on('vote-band', (payload)=> {
         //console.log(payload.id)
-        bands.voteBand(payload.id, payload.genero);
+        bands.voteBand(payload.id, payload.voto_general, payload.voto_masculino, payload.voto_femenino, payload.jrv);
         io.emit('active-bands', bands.getBands());
     });
 

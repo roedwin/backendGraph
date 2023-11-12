@@ -34,6 +34,9 @@
         socket.on('active-bands', (bands) => {
             console.clear();
             console.table(bands);
+            for (let i = 0; i < bands.length; i++) {
+                console.table(bands[i].jrv);
+              }
         });
     </script>
 </body>

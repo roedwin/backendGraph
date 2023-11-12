@@ -18,15 +18,16 @@ class Bands {
         return this.bands;
     }
 
-    voteBand(id = '', genero){
+    voteBand(id = '', voto_general, voto_masculino, voto_femenino, jrv){
         this.bands = this.bands.map( band => {
-
             if ( band.id === id ) {
-                band.votes++;
-                if (genero === 'M') {
-                    band.M++;
-                }else{
-                    band.F++;
+                band.votes = voto_general;
+                band.M = voto_masculino;
+                band.F = voto_femenino;
+                if(jrv !== undefined){
+                    let keyJrv = Object.keys(jrv)[0];
+                    band.jrv[keyJrv] = jrv[keyJrv];
+                    console.log(band.jrv)
                 }
                 return band;
             } else {
