@@ -7,10 +7,10 @@ const WebSocket = require('ws');
 
 const bands = new Bands();
 
-bands.addBand(new Band(1,'FMLN'));
-bands.addBand(new Band(2,'Nuevas Ideas'));
-bands.addBand(new Band(3,'Arena'));
-bands.addBand(new Band(4,'PCN'));
+// bands.addBand(new Band(1,'FMLN'));
+// bands.addBand(new Band(2,'Nuevas Ideas'));
+// bands.addBand(new Band(3,'Arena'));
+// bands.addBand(new Band(4,'PCN'));
 
 // const serverUrl = 'ws://34.224.60.108:3000/';
 // const my_socket = new WebSocket(serverUrl);
@@ -41,9 +41,27 @@ io.on('connection', client => {
         io.emit('active-bands', bands.getBands());
     });
 
+    client.on('votes-bands', (payload) => {
+        payload.forEach(element => {
+            const { id_partido, _count, genero, departamento } = element;
+            bands.voteBand(id_partido, _count, genero.masculino, genero.femenino, departamento);            
+        });
+        io.emit('active-bands', bands.getBands());
+    });
+
     client.on('add-band', (payload) =>{
         console.log(payload);
         bands.addBand(new Band(payload.id,payload.name));
+        io.emit('active-bands', bands.getBands());
+    });
+
+    client.on('add-bands', (payload) =>{
+        console.log(payload);
+        const elementos = payload.partidos_politicos;
+        elementos.forEach(element => {
+            const { id_partido_politico, siglas } = element;
+            bands.addBand(new Band(id_partido_politico, siglas));           
+        });
         io.emit('active-bands', bands.getBands());
     });
 

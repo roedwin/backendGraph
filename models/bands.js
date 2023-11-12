@@ -6,7 +6,12 @@ class Bands {
     }
 
     addBand(band = new Band()) {
-        this.bands.push(band);
+        const partidoExiste = this.bands.some(existingBand => existingBand.id == band.id);
+        if (!partidoExiste) {
+            this.bands.push(band);            
+        } else {
+            console.log(`El partido politico con el ID ${band.id} ya existe`);
+        }
     }
 
     getBands(){
@@ -18,17 +23,13 @@ class Bands {
         return this.bands;
     }
 
-    voteBand(id = '', voto_general, voto_masculino, voto_femenino, jrv){
+    voteBand(id = '', voto_general, voto_masculino, voto_femenino, departamentos){
         this.bands = this.bands.map( band => {
             if ( band.id === id ) {
                 band.votes = voto_general;
                 band.M = voto_masculino;
                 band.F = voto_femenino;
-                if(jrv !== undefined){
-                    let keyJrv = Object.keys(jrv)[0];
-                    band.jrv[keyJrv] = jrv[keyJrv];
-                    console.log(band.jrv)
-                }
+                band.dep = departamentos;
                 return band;
             } else {
                 return band;

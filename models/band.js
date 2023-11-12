@@ -7,7 +7,7 @@ class Band {
         this.votes = 0;
         this.M = 0;
         this.F = 0;
-        this.jrv ={};
+        this.dep = [];
     }
 }
 
